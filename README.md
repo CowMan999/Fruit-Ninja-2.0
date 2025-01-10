@@ -1,7 +1,7 @@
 # Fruit-Ninja-2.0
 Part D - Final Project - Software Development Life Cycle
 
-# Game Overview
+## Game Overview
 Fruit will fly in from the bottom of the screen, and fall back down
 Bombs will also do the same thing, being mixed in with the fruit
 The player tries to click on the fruit to slice them, but must avoid the bombs
