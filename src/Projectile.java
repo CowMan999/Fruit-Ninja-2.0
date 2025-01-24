@@ -42,7 +42,8 @@ public abstract class Projectile extends Rectangle {
 		// random spawn pos
 		setX(((pane.getWidth()/2)*Math.random())+pane.getWidth()/4);
 		setY(pane.getHeight()+50);
-		
+
+		// set sprite based on param
 		ImagePattern imagePattern = new ImagePattern(i);
 		super.setFill(imagePattern);
 
@@ -52,6 +53,7 @@ public abstract class Projectile extends Rectangle {
 			velocityX = -velocityX;
 		}
 
+		// random velocity
 		velocityY = -(SPEEDY + Math.random()*SPEEDYVAR);
 		velocityRot = Math.random()*SPEEDROT*2 - SPEEDROT;
 
