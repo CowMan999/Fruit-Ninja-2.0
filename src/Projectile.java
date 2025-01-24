@@ -25,6 +25,7 @@ public abstract class Projectile extends Rectangle {
 
 	protected boolean bad = false;
 
+	// constants
 	private static int SPEEDX = 3;
 	private static int SPEEDXVAR = 3;
 	private static int SPEEDY = 18;
@@ -61,6 +62,7 @@ public abstract class Projectile extends Rectangle {
 		pane.getChildren().add(this);
 	}
 
+	// abstract methods to be implemented
 	abstract void onContact();
 	abstract void additionalUpdate();
 	abstract void onOutOfBounds();
@@ -87,6 +89,7 @@ public abstract class Projectile extends Rectangle {
 		additionalUpdate();
 	}
 
+	// simple collision abstraction
 	boolean containsPoint(Point2D point) {
 		if(disabled) {
 			return false;
@@ -95,24 +98,29 @@ public abstract class Projectile extends Rectangle {
 		}
 	}
 
+	// getter for disabled
 	void disable() {
 		disabled = true;
 	}
 
+	// destroy current instance
 	void destroy() {
 		pane.getChildren().remove(this);
 		shouldDestroy = true;
 	}
 
+	// should be removed from projectile arraylist?
 	boolean shouldRemove() {
 		return shouldDestroy;
 	}
 
+	// launch via velocity
 	void launch() {
 		velocityX = Math.random()*20;
 		velocityY = 10;
 	}
 
+	// bad bool getter
 	boolean isBad() {
 		return bad;
 	}
