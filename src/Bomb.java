@@ -27,16 +27,18 @@ public class Bomb extends Projectile {
 		setFill(new ImagePattern(aftermath));
 	}
 
-
+	// destroy if falls off screen
 	void onOutOfBounds() {
 		destroy();
 	}
 
+	// explosion effect
 	void additionalUpdate() {
 		if(disabled) {
 			aftermathTimer--;
 			setRotate(90);
 
+			// grow over time
 			if(aftermathTimer > 25) {
 				setScaleX(getScaleX()+0.1);
 				setScaleY(getScaleY()+0.1);
@@ -45,12 +47,14 @@ public class Bomb extends Projectile {
 				setScaleY(getScaleY()*0.75);
 			}
 
+			// destroy after timer expires
 			if(aftermathTimer == 0) {
 				destroy();
 			}
 		}
 	}
-	
+
+	// shouldn't cause life loss if falls off
 	boolean shouldLoseLife() {
 		return false;
 	}
