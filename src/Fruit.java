@@ -18,7 +18,7 @@ public class Fruit extends Projectile {
 	private boolean loseLife = false;
 	private boolean powerUp = false;
 
-	// simple constructor, calls enemy constructor and determines direction
+	// simple constructor, calls projectle constructor with random image updates instance vars
 	public Fruit(Image[] i, Image i2, Pane p, boolean pUp) {
 		super(i[(int)Math.floor(Math.random()*i.length)], p);
 		aftermath = i2;
