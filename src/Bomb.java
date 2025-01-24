@@ -1,11 +1,7 @@
-// EnemyShoot.java
+// Bomb.java
 // Edward Mayen
-// 2024-12-16
-// subclass of enemy, moves side to side rapidly and shoot bullets based on player proximity
-// EnemyDive.java
-// Edward Mayen
-// 2024-12-16
-// subclass of enemy, moves down towards player rapidly
+// 2025-01-16
+// subclass of projectile, causes the player to lose a life if slashed
 
 import java.util.ArrayList;
 
@@ -53,5 +49,9 @@ public class Bomb extends Projectile {
 				destroy();
 			}
 		}
+	}
+	
+	boolean shouldLoseLife() {
+		return false;
 	}
 }

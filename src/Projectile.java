@@ -1,7 +1,7 @@
-// Bullet.java
+// Projectile.java
 // Edward Mayen
-// 2024-12-16
-// simple bullet class, can damage player or enemies and move at a constant rate
+// 2025-01-09
+// simple projectile class, flies up and is affected by gravity, has abstract methods for further handling of events
 
 import java.util.Random;
 
@@ -19,7 +19,9 @@ public abstract class Projectile extends Rectangle {
 
 	protected boolean disabled = false;
 	private boolean shouldDestroy = false;
+	private boolean aboveBottom = false;
 	private double velocityX = 0, velocityY = 0, velocityRot = 0;
+	
 
 	protected boolean bad = false;
 
@@ -59,9 +61,10 @@ public abstract class Projectile extends Rectangle {
 		pane.getChildren().add(this);
 	}
 
-	abstract void onOutOfBounds();
 	abstract void onContact();
 	abstract void additionalUpdate();
+	abstract void onOutOfBounds();
+	abstract boolean shouldLoseLife();
 
 	// fly around screen
 	void update() {
@@ -69,8 +72,15 @@ public abstract class Projectile extends Rectangle {
 			velocityY += GRAVITY;
 			setX(getX() + velocityX);
 			setY(getY() + velocityY);
+
+			if(getY() < pane.getHeight() && !aboveBottom) {
+				aboveBottom = true;
+			} else if(getY() > pane.getHeight() && aboveBottom) {
+				onOutOfBounds();
+				aboveBottom = false;
+			}
 			
-			// rotate
+			// rotate                              
 			setRotate(getRotate() + velocityRot);
 		}
 
@@ -96,6 +106,11 @@ public abstract class Projectile extends Rectangle {
 
 	boolean shouldRemove() {
 		return shouldDestroy;
+	}
+
+	void launch() {
+		velocityX = Math.random()*20;
+		velocityY = 10;
 	}
 
 	boolean isBad() {

@@ -1,7 +1,7 @@
-// EnemyDive.java
+// Fruit.java
 // Edward Mayen
-// 2024-12-16
-// subclass of enemy, moves down towards player rapidly
+// 2025-01-15
+// subclass of projectile, increases score if slashed and causes 1 life lost if it falls out of frame
 
 import java.util.ArrayList;
 
@@ -14,12 +14,15 @@ public class Fruit extends Projectile {
 	Image aftermath;
 	int aftermathTimer = 30;
 	double afterVel = 0.4;
+	private boolean loseLife = false;
+	private boolean powerUp = false;
 
 	// simple constructor, calls enemy constructor and determines direction
-	public Fruit(Image[] i, Image i2, Pane p) {
+	public Fruit(Image[] i, Image i2, Pane p, boolean pUp) {
 		super(i[(int)Math.floor(Math.random()*i.length)], p);
 		aftermath = i2;
 		bad = false;
+		powerUp = pUp;
 	}
 
 	// on contact
@@ -31,7 +34,16 @@ public class Fruit extends Projectile {
 	}
 
 	void onOutOfBounds() {
+		loseLife = true;
 		destroy();
+	}
+
+	boolean isPowerUp() {
+		return powerUp;
+	}
+
+	boolean shouldLoseLife() {
+		return loseLife;
 	}
 
 	void additionalUpdate() {
