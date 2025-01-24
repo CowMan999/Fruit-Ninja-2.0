@@ -11,6 +11,7 @@ import javafx.scene.paint.ImagePattern;
 
 public class Fruit extends Projectile {
 
+	// variables
 	Image aftermath;
 	int aftermathTimer = 30;
 	double afterVel = 0.4;
@@ -28,33 +29,42 @@ public class Fruit extends Projectile {
 	// on contact
 	void onContact() {
 		disable();
+
+		// setup for effect
 		setFill(new ImagePattern(aftermath));
 		setScaleX(0.8 + Math.random()*0.4);
 		setScaleY(0.8 + Math.random()*0.4);
 	}
 
+	// should lose life if falls off
 	void onOutOfBounds() {
 		loseLife = true;
 		destroy();
 	}
 
+	// wrapper for private bool
 	boolean isPowerUp() {
 		return powerUp;
 	}
 
+	// return if life should be lost
 	boolean shouldLoseLife() {
 		return loseLife;
 	}
 
+	// splash effect on back
 	void additionalUpdate() {
 		if(disabled) {
 			aftermathTimer--;
 
+			// move down
 			if(aftermathTimer <= 0) {
 				setY(getY()+afterVel);
 				afterVel *= 1.02;
 			}
 
+
+			// delete on frame exit
 			if(getY()>pane.getHeight()+50) {
 				destroy();
 			}
